@@ -1,11 +1,11 @@
 import { Col, Container, Modal, Row } from 'react-bootstrap'
-import { useContext }                 from 'react'
-import { AppContext }                 from '../layout/ScreenLayout'
-import Stars                          from '../dumbs/Stars'
+import { useContext }          from 'react'
+import { AppContext, beersDb } from '../layout/ScreenLayout'
+import Stars                   from '../dumbs/Stars'
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 export const SingleBeer = () => {
-  const [appState, setState] = useContext(AppContext)
+  const [appState, setState, beersDb]= useContext(AppContext)
   const { isModalBeerOpen, modalItem } = appState
   const { food_pairing } = modalItem
   const $modalFooter = ['abv', 'srm', 'ibc', 'ibu', 'ph']
@@ -22,8 +22,9 @@ export const SingleBeer = () => {
         show={ isModalBeerOpen }
         onHide={ handleModalBeer }
         fullscreen={ true }
+
       >
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Container fluid className="d-flex">
             {/*LEFT*/ }
             <Col xs={ 8 } md={ 8 }

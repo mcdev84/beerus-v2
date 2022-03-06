@@ -7,6 +7,7 @@ import Stars                                  from '../dumbs/Stars'
 import app                                    from '../../App'
 
 export const AppContext = createContext()
+export const beersDb = []
 
 export const ScreenLayout = () => {
   const [appState, setState] = useState({
@@ -20,9 +21,13 @@ export const ScreenLayout = () => {
     },
     random         : false,
     favIsOpen      : false,
-    search         : false,
-    beerSearch     : '',
-    foodSearch     : '',
+    url            : 'https://api.punkapi.com/v2/beers',
+    beerSearch     : '_',
+    alcMax         : '_',
+    alcMin         : '_',
+    abvGt          : '0',
+    abvLt          : '100',
+
   })
   const {
           beers,
@@ -31,34 +36,33 @@ export const ScreenLayout = () => {
           random,
           page,
           beerSearch,
-          search,
-          foodSearch,
+          abvGt,
+          abvLt,
+
         } = appState
+
   const { pageId, pagePer } = page
-  const beermatch = 'beer_name='
-  const foodmatch = 'food='
-  const dinamicUrl =
-          !random
-            ? search ?
-              `https://api.punkapi.com/v2/beers?${ beermatch }${ beerSearch }&${ foodmatch }${ foodSearch }`
-              : `https://api.punkapi.com/v2/beers?page=${ pageId }&per_page=${ pagePer }`
-            : `https://api.punkapi.com/v2/beers/random `
 
   useEffect(async () => {
-    let response = await fetch(dinamicUrl)
+    let response = await fetch(appState.url)
       .then(resolve => resolve.json())
-      .then(
-        res => setState({ ...appState, beers: appState.beers = res }))
-  }, [dinamicUrl])
-
+      .then(res => {
+        res.map(item => beersDb.push(item))
+        setState({ ...appState, beers: appState.beers = res })
+      })
+    /*appState.beers.length = 0 &&
+                            setState(
+                              { ...appState, beers: appState.beers = beersDb })*/
+  }, [appState.url])
 
   return (
     <>
-      <AppContext.Provider value={ [appState, setState] }>
+      <AppContext.Provider value={ [appState, setState, beersDb] }>
         <Header/>
 
-        <main><SingleBeer/>
-          <Container fluid>
+        <main>
+          <SingleBeer/>
+          <Container fluid className="mybody">
 
             { favIsOpen ? <List array={ favItems }/> :
               <List array={ beers }/> }

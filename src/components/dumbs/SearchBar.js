@@ -1,14 +1,14 @@
 import { Col, FormControl, InputGroup } from 'react-bootstrap'
-import { useContext, useState }         from 'react'
-import { AppContext }                   from '../layout/ScreenLayout'
+import { useContext, useState } from 'react'
+import { AppContext, beersDb }  from '../layout/ScreenLayout'
 
-export const SearchBar = ({ span, placeholder, classname, offset }) => {
-  const [appState, setState] = useContext(AppContext)
+export const SearchBar = ({ span, placeholder, classname, offset, inputCapture, id}) => {
+  const [appState, setState, beersDb] = useContext(AppContext)
 
-  const handleSearch = () => setState(prevAppState=> ({ ...prevAppState,
-      search: !prevAppState.search,
-    }))
-  console.log(appState.search )
+
+
+
+
   return (
 
     <Col xs={ { span: span, offset: offset } }
@@ -19,8 +19,8 @@ export const SearchBar = ({ span, placeholder, classname, offset }) => {
                      placeholder={ placeholder }
                      aria-label={ placeholder }
                      aria-describedby="basic-addon1"
-                     onClick={ ()=> handleSearch()
-        }
+                     onChange={ (e)=>
+                       inputCapture[id](e) }
         />
       </InputGroup>
     </Col>

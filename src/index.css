@@ -1,7 +1,18 @@
 ul {
 	list-style: none;
 }
-
+.li-beer{
+	border-radius:3px;
+	background-color: white;
+	margin-top:1%
+}
+.li-beer:hover{
+	background-color: gold;
+	
+}
+.mybody{
+	background-color: lightgray;
+}
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -104,6 +115,10 @@ article{
 .abbinamenti{
 	padding-left:6%;
 }
+.selection-item:hover{
+	background-color: gold;
+}
+
 .right {
 	
 	background: radial-gradient(circle at center, gold,
