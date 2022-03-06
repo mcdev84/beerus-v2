@@ -9,32 +9,36 @@ export const Header = () => {
   const { beerSearch, abvGt, abvLt } = appState
 
   const handleName = (e) =>
-    setState(prevAppState => ({
-      ...prevAppState,
-      beerSearch: prevAppState.beerSearch = e.target.value,
-      url       : `https://api.punkapi.com/v2/beers?beer_name=${ beerSearch }&?food=${ beerSearch }`,
+    setState(prev => ({
+      ...prev,
+      beerSearch: prev.beerSearch = e.target.value,
+      url       : prev.url=`https://api.punkapi.com/v2/beers?beer_name=${ beerSearch }&?food=${ beerSearch }&?abv_gt=${ abvGt }&?abv_lt=${ abvLt }`,
     }))
+
   const handleAbvGt = (e) =>
-    setState(prevAppState => ({
-      ...prevAppState,
-      abvGt: prevAppState.abvGt = e.target.value,
-      url  : `https://api.punkapi.com/v2/beers?abv_gt=${ abvGt }`,
+    setState(prev => ({
+      ...prev,
+      abvGt: e.target.value!=='' ? prev.abvGt=e.target.value : prev.abvGt='_',
+      url       : prev.url=`https://api.punkapi.com/v2/beers?beer_name=${ beerSearch }&?food=${ beerSearch }&?abv_gt=${ abvGt }&?abv_lt=${ abvLt }`,
     }))
-  const handleAbvLt = (e) =>
-    setState(prevAppState => ({
-      ...prevAppState,
-      abvLt: prevAppState.abvLt = e.target.value,
-      url  : `https://api.punkapi.com/v2/beers?abv_gt=${ abvGt }&?abv.lt=${ abvLt }`,
+
+  const handleAbvLt = (e) => {
+
+    setState(prev => ({
+      ...prev,
+      abvLt: e.target.value!=='' ? prev.abvLt=e.target.value : prev.abvLt='_',
+      url       : prev.url=`https://api.punkapi.com/v2/beers?beer_name=${ beerSearch }&?food=${ beerSearch }&?abv_gt=${ abvGt }&?abv_lt=${ abvLt }`,
     }))
+  }
 
   const inputCapture = [handleName, handleAbvGt, handleAbvLt]
 
   return (
     <>
       <header>
-        <Container fluid className="p-0">
           <TopNav/>
           <Container fluid className="bg-dark">
+            <Container fluid>
             <Col className="d-none d-sm-flex align-items-start"
                  xs={ { span: 4, offset: 6 } }
                  md={ { span: 4, offset: 6 } }
@@ -67,7 +71,7 @@ export const Header = () => {
           <Container fluid className="d-xs-flex d-sm-none p-0 top-search">
             <SearchBar colWidth={ 12 }/>
           </Container>
-        </Container>
+      </Container>
       </header>
     </>
   )

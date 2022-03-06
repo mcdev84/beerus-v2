@@ -24,26 +24,29 @@ export const TopNav = () => {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Container>
+        <Container fluid>
 
-          <Col xs={ 6 } md={ 6 } xl={ 6 } className="d-flex align-items-center">
+          <Col className="d-flex align-items-center">
             <Navbar.Brand href="#home"
                           style={ { color: 'gold' } }>
-              <h4 className="d-flex float-left">BREWDOG</h4>
+              <h4 className="d-flex ">BREWDOG</h4>
             </Navbar.Brand>
           </Col>
-          <Col xs={ { span: 4, offset: 2 } }
-               md={ { span: 4, offset: 2 } }
-               xl={ { span: 4, offset: 2 } }>
+
             <Nav className="me-auto">
-              <Container>
-                <Nav.Link href="#home"
-                          onClick={ () => handlRandom() }>Random beer</Nav.Link>
-                <Nav.Link href="#features"
+              <Container fluid classname="d-flex flex-row ">
+                <Col xs={ { span: 2, offset: 2 } }
+                             md={ { span: 2, offset: 2 } }
+                             xl={ { span: 2, offset: 2 } }>
+                <h6 style={ { color: 'white'}}
+                    onClick={ () => handlRandom() }>Random beer</h6>
+              </Col>
+                <h6 style={ { color: 'white'}}
                           onClick={ () => handleFavorites() }>
-                  Favorites</Nav.Link></Container>
+                  Favorites</h6>
+              </Container>
             </Nav>
-          </Col>
+
         </Container>
       </Navbar></>
   )

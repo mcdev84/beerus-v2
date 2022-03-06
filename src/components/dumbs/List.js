@@ -19,9 +19,9 @@ export const List = ({ array, ulclass, liclass }) => {
       <Row xs={ 12 }
            md={ 12 }
            xl={ 12 } className="d-flex align-items-start">
-        <ul className="d-flex flex-column">
+        <ul className="d-flex flex-column ">
           { array.map(obj =>
-            <li key={ obj.id } className="li-beer">
+            <li key={ obj.id } className="li-beer p-2">
               <section className="d-flex  ">
                 <Container fluid className="d-flex flex-row p-0 selection-item">
                   <Col className="d-flex align-items-start ">

@@ -21,12 +21,12 @@ export const ScreenLayout = () => {
     },
     random         : false,
     favIsOpen      : false,
-    url            : 'https://api.punkapi.com/v2/beers',
     beerSearch     : '_',
     alcMax         : '_',
     alcMin         : '_',
     abvGt          : '0',
-    abvLt          : '100',
+    abvLt          : '56',
+    url            : 'https://api.punkapi.com/v2/beers',
 
   })
   const {
@@ -51,7 +51,7 @@ export const ScreenLayout = () => {
         setState({ ...appState, beers: appState.beers = res })
       })
   }, [appState.url,random,beerSearch,abvGt,abvLt ])
-  console.log(favItems)
+  console.log(beers)
   return (
     <>
       <AppContext.Provider value={ [appState, setState, beersDb] }>
