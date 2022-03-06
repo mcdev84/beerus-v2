@@ -17,7 +17,7 @@ export const TopNav = () => {
   const handlRandom = () =>
     setState(prevAppState => ({
       ...prevAppState,
-
+      random: !prevAppState.random,
       url: 'https://api.punkapi.com/v2/beers/random',
     }))
 

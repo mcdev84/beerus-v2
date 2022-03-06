@@ -50,11 +50,8 @@ export const ScreenLayout = () => {
         res.map(item => beersDb.push(item))
         setState({ ...appState, beers: appState.beers = res })
       })
-    /*appState.beers.length = 0 &&
-                            setState(
-                              { ...appState, beers: appState.beers = beersDb })*/
-  }, [appState.url])
-
+  }, [appState.url,random,beerSearch,abvGt,abvLt ])
+  console.log(favItems)
   return (
     <>
       <AppContext.Provider value={ [appState, setState, beersDb] }>

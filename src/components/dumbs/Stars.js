@@ -6,20 +6,25 @@ export default function Stars ({ item, classname }) {
   const [appState, setState] = useContext(AppContext)
   const [isClicked, setClick] = useState(false)
   const { favItems } = appState
-  const handleClick = () => {
+
+  const handleClick = (item) => {
+
     setClick(!isClicked)
-    setState(prevAppState => ({
-      ...prevAppState,
-      favItems: [...prevAppState.favItems, item],
-    }))
-    localStorage.setItem('FavList', JSON.stringify(favItems))
+    !isClicked ? setState(prev => ({
+      ...prev,
+      favItems: [...prev.favItems, item],
+    })) : setState(prev=> {
+      return { ...prev, favItems: prev.favItems.filter(el=>el.id!==item.id) }
+    })
+    console.log(favItems)
+    sessionStorage.setItem('FavList', JSON.stringify(favItems))
   }
 
   return (
     isClicked ?
       <span><BsStarFill className={ classname }
-                        onClick={ () => handleClick() }/> </span> :
+                        onClick={ () => handleClick(item) }/> </span> :
       <span> <BsStar className={ classname }
-                     onClick={ () => handleClick() }/></span>
+                     onClick={ () => handleClick(item) }/></span>
   )
 }
