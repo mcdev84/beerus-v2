@@ -24,7 +24,7 @@ export const BeerDetails = () => {
       <Modal
         show={ isModal }
         onHide={ () => handleClose() }
-        size={ 'lg' }>
+        fullscreen={true}>
 
         <ModalNavigation/>
         <ModalHeader/>
