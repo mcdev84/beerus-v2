@@ -7,10 +7,12 @@ const Search = styled.input`
   background-color: black;
   color: white;
   placeholder: ${ props => props.placeholder };
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid gold;
   border-top: none;
   border-left: none;
   border-right: none;
+  border-radius:0.25em;
+   
 `
 export const SearchBar = () => {
   const [state, dispatch] = useContext(AppContext)

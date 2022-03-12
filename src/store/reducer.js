@@ -18,21 +18,46 @@ export function reducer (state, action) {
       newState.abvLt = action.payload === '' ? '56' : action.payload
       return newState
 
-    case 'FAVORITES':
-      newState.favs = Array.from(new Set([...newState.favs, action.payload]))
-      localStorage.setItem('Favorites', JSON.stringify(newState.favs))
-      return newState
-
     case 'OPEN_FAVS':
-      return { ...newState, isFavOpen: !newState.isFavOpen }
+      if (action.payload === null) {
+        newState.isFavOpen = false
+      } else {
+        newState.isFavOpen = !newState.isFavOpen
+      }
+      return newState
 
     case 'RANDOM':
       return ({ ...newState, random: !newState.random })
 
     case 'MODAL_OPEN':
-      return ({ ...newState,
-        isModal: !newState.isModal,
-        modalItemIndex: newState.modalItemIndex = action.payload })
+      return ({
+        ...newState,
+        isModal  : !newState.isModal,
+        modalItem: newState.modalItem = action.payload,
+      })
+
+    case 'MODAL_TOGGLE':
+      return ({ ...newState, isModal: !newState.isModal })
+
+    case 'HANDLE_PAGES':
+      if (action.payload <= 10) {
+        newState.currentPage = action.payload
+      } else {
+        newState.currentPage = 10
+      }
+      return newState
+
+    case 'NEXT_ITEM':
+      return ({
+        ...newState,
+        modalItem: newState.modalItem = action.payload,
+      })
+    case 'PREV_ITEM':
+
+
+      newState.modalItem = action.payload
+      console.log(action.payload)
+      return newState
 
     default:
       return state

@@ -12,7 +12,6 @@ const HeaderLayout = styled.header`
   grid-template-rows: 3em 1.6em;
   background-color: ${ props => props.bg };
   padding: 0 6% 1%;
-  border-radius: 5px
 `
 export const Header = () => {
 

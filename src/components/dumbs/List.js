@@ -20,27 +20,27 @@ const ListItemLayout = styled.li`
   margin: 2% 0 2% 0;
   border-radius: 5px;
   /*color: gray;*/
-
-  :hover {
+  &:hover {
     background-color: gold;
     color: white;
   }
 `
 export const List = (props) => {
   const [state, dispatch] = useContext(AppContext)
-  const handleMouseEnter = () => dispatch({ type: 'MOUSE_ENTER' })
   const { beersInPage } = state
   const handleModal = (item) =>
-    dispatch({ type: 'MODAL_OPEN',payload:item.id })
+    dispatch({ type: 'MODAL_OPEN', payload: item })
 
-  /* localStorage.clear()*/
+   /*localStorage.clear()*/
   return (
     <>
       <ListLayout area={ 'c' }>
         { props.arrayIn.map(item =>
-          <ListItemLayout key={ item.id } onClick={ () =>handleModal(item) }>
+          <ListItemLayout key={ item.id }>
             <ItemGrid ps={ 'center start' }
-                      area={ 'name' }>{ item.name }</ItemGrid>
+                      area={ 'name' }
+                      onClick={ () => handleModal(item) }>
+              { item.name }</ItemGrid>
             <ItemGrid ps={ 'center end' }
                       area={ 'abv' }>{ item.abv }</ItemGrid>
             <ItemGrid ps={ 'center end' }
