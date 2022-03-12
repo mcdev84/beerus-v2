@@ -9580,6 +9580,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-poper@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-poper/-/react-poper-1.1.5.tgz#a4643c0743af5197255cabf1b1ba2d5b7a897db0"
+  integrity sha512-M5NOqWeOgh676i8+llmu3cEXi5DvFWLeNSqRyWH6dlYixEcKfLvHTeBxkbef+cHumeyFnkDqAG0+3iv9/+aqJA==
+
 react-popper@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-2.2.5.tgz#1214ef3cec86330a171671a4fbcbeeb65ee58e96"
