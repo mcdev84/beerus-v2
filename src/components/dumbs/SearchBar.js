@@ -1,28 +1,45 @@
-import { Col, FormControl, InputGroup } from 'react-bootstrap'
-import { useContext, useState }         from 'react'
-import { AppContext }                   from '../layout/ScreenLayout'
+import { ItemGrid }   from '../layout/ScreenComposition'
+import { useContext } from 'react'
+import { AppContext } from '../../App'
+import styled         from 'styled-components'
 
-export const SearchBar = ({ span, placeholder, classname, offset }) => {
-  const [appState, setState] = useContext(AppContext)
+const Search = styled.input`
+  background-color: black;
+  color: white;
+  placeholder: ${ props => props.placeholder };
+  border-bottom: 1px solid gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+`
+export const SearchBar = () => {
+  const [state, dispatch] = useContext(AppContext)
+  const handleSearchName = (e) => dispatch(
+    { type: 'SEARCH_NAME_FOOD', payload: e.target.value })
+  const handleSearchMin = (e) => dispatch(
+    { type: 'SEARCH_MIN', payload: e.target.value })
+  const handleSearchMax = (e) => dispatch(
+    { type: 'SEARCH_MAX', payload: e.target.value })
 
-  const handleSearch = () => setState(prevAppState=> ({ ...prevAppState,
-      search: !prevAppState.search,
-    }))
-  console.log(appState.search )
   return (
+    <>
+      < ItemGrid area={ 's1' }
+                 ps={ 'center start' }>
+        <Search placeholder={ 'Filtra per Nome/Abbinamento' }
+                onChange={ (e) => handleSearchName(e) }/>
+      </ItemGrid>
 
-    <Col xs={ { span: span, offset: offset } }
-         md={ { span: span, offset: offset } }
-         xl={ { span: span, offset: offset } }>
-      <InputGroup className="mb-3">
-        <FormControl className={ classname }
-                     placeholder={ placeholder }
-                     aria-label={ placeholder }
-                     aria-describedby="basic-addon1"
-                     onClick={ ()=> handleSearch()
-        }
-        />
-      </InputGroup>
-    </Col>
+      < ItemGrid area={ 's2' }
+                 ps={ 'center end' }>
+        <Search placeholder={ 'Da' }
+                onChange={ (e) => handleSearchMin(e) }/>
+      </ItemGrid>
+
+      < ItemGrid area={ 's3' }
+                 ps={ 'center start' }
+                 onChange={ (e) => handleSearchMax(e) }>
+        <Search placeholder={ 'A' }/>
+      </ItemGrid>
+    </>
   )
 }

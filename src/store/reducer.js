@@ -1,38 +1,40 @@
-export const favList = []
-export default function reducer (state, action) {
+export function reducer (state, action) {
   const newState = { ...state }
 
   switch (action.type) {
 
     case 'INIT':
-      console.log(action.payload)
-      return { ...newState, beers: newState.beers = [...action.payload] }
+      return ({ ...newState, db: newState.db = action.payload })
 
-    case 'BEER_CLICK':
-      const listCheck = newState.favItems.length > 0 ? newState.favItems.filter(
-          item => (item.id !== action.payload.id)
-                  && ({
-              ...newState, favItems:
-                [...newState.favItems, action.payload.id],
-            }))
-        : ({ ...newState, favItems: [action.payload.id] })
+    case 'SEARCH_NAME_FOOD':
+      newState.beerName = action.payload === '' ? '_' : action.payload
+      return newState
 
-      localStorage.setItem('FavList', JSON.stringify(favList))
-      console.log(newState.favItems)
+    case 'SEARCH_MIN':
+      newState.abvGt = action.payload === '' ? '0' : action.payload
+      return newState
 
-      return {
-        ...newState,
-        isModalBeerOpen: !newState.isModalBeerOpen,
-        modalItem      : newState.modalItem = action.payload,
-      }
+    case 'SEARCH_MAX':
+      newState.abvLt = action.payload === '' ? '56' : action.payload
+      return newState
 
-    case 'BEER_CLOSE':
-      return {
-        ...newState,
-        isModalBeerOpen: !newState.isModalBeerOpen,
-      }
+    case 'FAVORITES':
+      newState.favs = Array.from(new Set([...newState.favs, action.payload]))
+      localStorage.setItem('Favorites', JSON.stringify(newState.favs))
+      return newState
+
+    case 'OPEN_FAVS':
+      return { ...newState, isFavOpen: !newState.isFavOpen }
+
+    case 'RANDOM':
+      return ({ ...newState, random: !newState.random })
+
+    case 'MODAL_OPEN':
+      return ({ ...newState,
+        isModal: !newState.isModal,
+        modalItemIndex: newState.modalItemIndex = action.payload })
 
     default:
-      return newState
+      return state
   }
 }

@@ -1,37 +1,56 @@
-import { Row }        from 'react-bootstrap'
+import styled         from 'styled-components'
+import { ItemGrid }   from '../layout/ScreenComposition'
 import { useContext } from 'react'
-import { AppContext } from '../layout/ScreenLayout'
-import Stars          from './Stars'
+import { AppContext } from '../../App'
+import { Star }       from './Star'
 
-export const List = ({ array, ulclass, liclass }) => {
-  const [appState, setState] = useContext(AppContext)
-  const { isModalBeerOpen, modalItem, favIsOpen } = appState
+const ListLayout = styled.ul`
+  list-style: none;
+  grid-area: ${ props => props.area };
+  align-items: start;
+  padding: 2% 6% 2% 6%;
+`
+const ListItemLayout = styled.li`
+  display: grid;
+  grid-template-areas: "name abv star";
+  grid-template-columns: 66% 16.5% 16.5%;
+  justify-content: stretch;
+  align-self: center;
+  background-color: white;
+  margin: 2% 0 2% 0;
+  border-radius: 5px;
+  /*color: gray;*/
 
-  const handleBeer = (beer) =>
-  setState(prevAppState=> ({ ...prevAppState,
-    isModalBeerOpen: !prevAppState.isModalBeerOpen,
-    modalItem: prevAppState.modalItem=beer
-  }))
+  :hover {
+    background-color: gold;
+    color: white;
+  }
+`
+export const List = (props) => {
+  const [state, dispatch] = useContext(AppContext)
+  const handleMouseEnter = () => dispatch({ type: 'MOUSE_ENTER' })
+  const { beersInPage } = state
+  const handleModal = (item) =>
+    dispatch({ type: 'MODAL_OPEN',payload:item.id })
 
+  /* localStorage.clear()*/
   return (
     <>
-      <Row xs={ 12 }
-           md={ 12 }
-           xl={ 12 } className="d-flex align-items-start">
-        <ul className="d-flex flex-column ">
-          { array.map(obj =>
-            <li key={ obj.id }>
-              <section className="d-flex">
-                <em onClick={()=>handleBeer(obj)}>
-                  { obj.name }
-                </em>
-                <span>{ obj.abv }</span>
-                {!favIsOpen&&<Stars item={obj} classname={'stars'}/>}
-              </section>
-            </li>)
-          }
-        </ul>
-      </Row>
+      <ListLayout area={ 'c' }>
+        { props.arrayIn.map(item =>
+          <ListItemLayout key={ item.id } onClick={ () =>handleModal(item) }>
+            <ItemGrid ps={ 'center start' }
+                      area={ 'name' }>{ item.name }</ItemGrid>
+            <ItemGrid ps={ 'center end' }
+                      area={ 'abv' }>{ item.abv }</ItemGrid>
+            <ItemGrid ps={ 'center end' }
+                      m={ '0 0 5.5% 0' } area={ 'star' }>
+              <Star key={ item.id } item={ item }/>
+            </ItemGrid>
+          < /ListItemLayout>,
+        ) }
+      </ListLayout>
     </>
   )
+
 }
