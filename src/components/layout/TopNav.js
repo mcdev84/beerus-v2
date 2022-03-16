@@ -1,28 +1,24 @@
-import { ItemGrid } from './ScreenComposition'
+import { ItemGrid }   from './ScreenComposition'
 import { useContext } from 'react'
 import { AppContext } from '../../App'
 
-export const RegularNav = ({
-  name,
-  area,
-  area1,
-  area2,
-  handleClick,
-  modal,
-}) => {
+export const TopNav = ({ area, area1, area2 }) => {
   const [state, dispatch] = useContext(AppContext)
   const { isModal } = state
   const cookies = JSON.parse(localStorage.getItem('Favorites'))
+  const handleClick = () => dispatch({ type: 'MODAL_TOGGLE' })
   const handleRandom = () => dispatch({ type: 'RANDOM' })
   const handleFavs = () => dispatch({ type: 'OPEN_FAVS', payload: cookies })
+  const first = isModal ? 'All beers' : 'BREWDOG'
 
   return (
     <>
       < ItemGrid ps={ 'center start' }
                  color={ 'gold' }
                  area={ area }
-                 onClick={ () => handleClick() }
-                 modal={ isModal }>{ name }</ItemGrid>
+                 onClick={ () => isModal && handleClick() }
+                 modal={ isModal }>{ first }
+      </ItemGrid>
 
       < ItemGrid b={ '1px solid gray' }
                  ps={ 'center end' }

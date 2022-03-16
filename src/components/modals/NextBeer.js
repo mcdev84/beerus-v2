@@ -15,13 +15,13 @@ const NextPageLayout = styled.section`
   background-color: gold;
   padding: 2% 2% 2% 2%;
   border-radius: 3px;
-  margin: 5% 0 0 0;
+  margin: 0 6% 0 0;
 `
 export const BeerText = styled.h6`
   font-size: clamp(0.5em, 0.8em, 1.2em);
 `
 
-export const NextPage = () => {
+export const NextBeer = () => {
   const [state, dispatch] = useContext(AppContext)
   const { isModal, db, modalItem } = state
   const nextIndex = db.indexOf(modalItem) + 1
@@ -29,7 +29,7 @@ export const NextPage = () => {
   const handleNext =()=>dispatch({type:'NEXT_ITEM', payload:db[nextIndex]})
 
   return (
-    <NextPageLayout a>
+    <NextPageLayout >
       <ItemGrid area={ 'nBeer' }
                 ps={ 'center' } pi={ 'center' }
                 m={ '0 0 0 0' }>
@@ -40,7 +40,7 @@ export const NextPage = () => {
       </ItemGrid>
       <ItemGrid area={ 'arrow' } ps={ 'center ' }
                 pi={ 'start end' }
-                m={ '0 0 0 0' }>
+                m={ '0 0 25% 0' }>
         <GoChevronRight  color={ 'gray' } onClick={()=>handleNext()}/>
       </ItemGrid>
 

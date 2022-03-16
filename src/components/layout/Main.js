@@ -1,18 +1,18 @@
-import { AppContext }    from '../../App'
-import { List }          from '../dumbs/List'
-import { useContext }    from 'react'
-import styled            from 'styled-components'
+import { AppContext }     from '../../App'
+import { List }           from '../dumbs/List'
+import { useContext }     from 'react'
+import styled             from 'styled-components'
 import { ItemGrid }      from './ScreenComposition'
-import { BeerModal }     from '../modals/BeerModal'
+import { ModalScreen }   from '../modals/ModalScreen'
 import { BeerListItems } from '../dumbs/BeerListItems'
-import { Pages }         from '../dumbs/Pages'
+import { Pages }          from '../dumbs/Pages'
 
 const MainLayout = styled.main`
   display: grid;
   grid-template-areas: "nbeers npages"
                        "c c";
   grid-template-columns: 1fr 1fr;
-  grid-template-row: auto;
+  grid-template-rows: auto;
   background-color: ${ props => props.bg };
 `
 export const Main = () => {
@@ -22,7 +22,7 @@ export const Main = () => {
 
   return (
     <MainLayout bg={ 'whitesmoke' } area={ 'main' }>
-      <BeerModal/>
+      <ModalScreen />
       <ItemGrid area={ 'nbeers' } pad={ '3% 0 0 12%' }>
         { !state.isFavOpen ?
           <h5> { db.length } Beers</h5> :
@@ -32,7 +32,7 @@ export const Main = () => {
         <Pages/>
       </ItemGrid>
       { !state.isFavOpen ?
-        <List arrayIn={ db }> <BeerListItems/> </List> :
+        <List arrayIn={ db } area={'c'}> <BeerListItems/> </List> :
         <List arrayIn={ cookies }><BeerListItems/> </List> }
     </MainLayout>
   )

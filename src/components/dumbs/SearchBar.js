@@ -11,11 +11,11 @@ const Search = styled.input`
   border-top: none;
   border-left: none;
   border-right: none;
-  border-radius:0.25em;
-   
+  border-radius: 0.25em;
+
 `
-export const SearchBar = () => {
-  const [state, dispatch] = useContext(AppContext)
+export const SearchBar = ({ area, area1, area2 }) => {
+  const [, , dispatch] = useContext(AppContext)
   const handleSearchName = (e) => dispatch(
     { type: 'SEARCH_NAME_FOOD', payload: e.target.value })
   const handleSearchMin = (e) => dispatch(
@@ -25,19 +25,19 @@ export const SearchBar = () => {
 
   return (
     <>
-      < ItemGrid area={ 's1' }
+      < ItemGrid area={ area }
                  ps={ 'center start' }>
         <Search placeholder={ 'Filtra per Nome/Abbinamento' }
                 onChange={ (e) => handleSearchName(e) }/>
       </ItemGrid>
 
-      < ItemGrid area={ 's2' }
+      < ItemGrid area={ area1 }
                  ps={ 'center end' }>
         <Search placeholder={ 'Da' }
                 onChange={ (e) => handleSearchMin(e) }/>
       </ItemGrid>
 
-      < ItemGrid area={ 's3' }
+      < ItemGrid area={ area2 }
                  ps={ 'center start' }
                  onChange={ (e) => handleSearchMax(e) }>
         <Search placeholder={ 'A' }/>
