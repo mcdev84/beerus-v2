@@ -8,7 +8,6 @@ export const AppContext = createContext()
 function App () {
   const [state, dispatch] = useReducer(reducer, {
     db         : [],
-    favs       : [],
     beerName   : '_',
     abvGt      : '0',
     abvLt      : '56',
@@ -27,7 +26,8 @@ function App () {
     await fetch(url)
       .then(resolve => resolve.json())
       .then(res => handleInit(res))
-  }, [random, beerName, abvGt, abvLt,currentPage])
+  }, [url])
+
 
   return (
     <div className={ 'App' }>

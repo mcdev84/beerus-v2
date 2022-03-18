@@ -23,6 +23,7 @@ export const ItemGridTemplate = styled.section`
   grid-gap: ${ props => props.gap };
   box-shadow: ${ props => props.boxShad };
   grid-row: ${ props => props.row };
+  text-align:${props=>props.textA}
 `
 export const ItemGrid = styled(ItemGridTemplate)
 (props => ({ border: props.modal && '1px solid gray' }))

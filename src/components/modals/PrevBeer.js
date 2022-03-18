@@ -13,7 +13,6 @@ const PrevPageLayout = styled.section`
   grid-template-columns: auto;
   grid-template-rows: ${ props => props.row };
   place-self: center start;
-
   background-color: gold;
   padding: 2% 2% 2% 2%;
   border-radius: 3px;
@@ -23,7 +22,7 @@ const PrevPageLayout = styled.section`
 
 export const PrevBeer = (area, height) => {
   const [state, dispatch] = useContext(AppContext)
-  const { isModal, db, modalItem } = state
+  const { db, modalItem } = state
   const prevIndex = (db.indexOf(modalItem) - 1) > 0
     ? db.indexOf(modalItem) - 1 : 0
   const prevItem = db[prevIndex]
@@ -32,15 +31,18 @@ export const PrevBeer = (area, height) => {
 
   return (
     <PrevPageLayout height={ height } area={ area }>
-      <ItemGrid area={ 'nBeer0' }
-                ps={ 'end' } pi={ 'center start' }
-                m={ '0 0 0 0' }>
-        <BeerText>
-          { prevIndex !== 0
-            ? truncateString(prevItem.name, 12)
-            : null }
-        </ BeerText>
-      </ItemGrid>
+      { window.innerWidth > 576 &&
+        <>
+          <ItemGrid area={ 'nBeer0' }
+                    ps={ 'end' } pi={ 'center start' }
+                    m={ '0 0 0 0' }>
+            <BeerText>
+              { prevIndex !== 0
+                ? truncateString(prevItem.name, 12)
+                : null }
+            </ BeerText>
+          </ItemGrid>
+        </> }
       <ItemGrid area={ 'arrow0' } ps={ 'center ' }
                 m={ '0 0 25% 0' }>
         <GoChevronLeft color={ 'gray' } onClick={ () => handlePrev() }/>

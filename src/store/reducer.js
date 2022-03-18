@@ -53,10 +53,7 @@ export function reducer (state, action) {
         modalItem: newState.modalItem = action.payload,
       })
     case 'PREV_ITEM':
-
-
       newState.modalItem = action.payload
-      console.log(action.payload)
       return newState
 
     default:

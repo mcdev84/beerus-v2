@@ -41,8 +41,8 @@ export const List = (props) => {
                       area={ 'name' }
                       onClick={ () => handleModal(item) }>
               { item.name }</ItemGrid>
-            <ItemGrid ps={ 'center end' }
-                      area={ 'abv' }>{ item.abv }</ItemGrid>
+            <ItemGrid ps={ 'center end  ' }
+                      area={ 'abv' }> { item.abv } %</ItemGrid>
             <ItemGrid ps={ 'center end' }
                       m={ '0 0 5.5% 0' } area={ 'star' }>
               <Star key={ item.id } item={ item }/>

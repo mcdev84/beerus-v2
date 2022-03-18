@@ -12,7 +12,7 @@ const ModalBod = styled.div`
   grid-template-areas: "... descr descr ... ... ..."
                        "... abb0 abb1 abb2 abb3 ...";
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 0.5fr;
-  grid-template-rows: auto clamp(10%, 25%, 50%);
+  grid-template-rows: auto ;
   gap: 1em;
   place-self: center end;
   padding: 0 6% 0 6%;
