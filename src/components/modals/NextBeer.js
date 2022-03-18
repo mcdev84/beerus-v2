@@ -26,22 +26,26 @@ export const NextBeer = () => {
   const { isModal, db, modalItem } = state
   const nextIndex = db.indexOf(modalItem) + 1
   const nextItem = db[nextIndex]
-  const handleNext =()=>dispatch({type:'NEXT_ITEM', payload:db[nextIndex]})
+  const handleNext = () => dispatch(
+    { type: 'NEXT_ITEM', payload: db[nextIndex] })
 
   return (
-    <NextPageLayout >
-      <ItemGrid area={ 'nBeer' }
-                ps={ 'center' } pi={ 'center' }
-                m={ '0 0 0 0' }>
-        <BeerText>
-          { truncateString (nextItem.name,12) }
-        </BeerText>
+    <NextPageLayout>
+      { window.innerWidth > 576 &&
+        <>
+          <ItemGrid area={ 'nBeer' }
+                    ps={ 'center' } pi={ 'center' }
+                    m={ '0 0 0 0' }>
+            <BeerText>
+              { truncateString(nextItem.name, 10) }
+            </BeerText>
 
-      </ItemGrid>
+          </ItemGrid>
+        </> }
       <ItemGrid area={ 'arrow' } ps={ 'center ' }
                 pi={ 'start end' }
                 m={ '0 0 25% 0' }>
-        <GoChevronRight  color={ 'gray' } onClick={()=>handleNext()}/>
+        <GoChevronRight color={ 'gray' } onClick={ () => handleNext() }/>
       </ItemGrid>
 
     </NextPageLayout>

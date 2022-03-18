@@ -6,13 +6,14 @@ import styled         from 'styled-components'
 const Search = styled.input`
   background-color: black;
   color: white;
-  placeholder: ${ props => props.placeholder };
   border-bottom: 1px solid gold;
   border-top: none;
   border-left: none;
-  border-right: none;
+  border-right: none; 
   border-radius: 0.25em;
-
+  &:focus{
+    outline : 0.1em solid gold ;
+  }
 `
 export const SearchBar = ({ area, area1, area2 }) => {
   const [, , dispatch] = useContext(AppContext)
@@ -25,23 +26,26 @@ export const SearchBar = ({ area, area1, area2 }) => {
 
   return (
     <>
-      < ItemGrid area={ area }
-                 ps={ 'center start' }>
+      < ItemGrid area={ area }>
         <Search placeholder={ 'Filtra per Nome/Abbinamento' }
                 onChange={ (e) => handleSearchName(e) }/>
       </ItemGrid>
 
-      < ItemGrid area={ area1 }
-                 ps={ 'center end' }>
-        <Search placeholder={ 'Da' }
-                onChange={ (e) => handleSearchMin(e) }/>
-      </ItemGrid>
+      { window.innerWidth > 472 &&
+        <>
+          < ItemGrid area={ area1 }
+                     ps={ 'center end' }>
+            <Search placeholder={ 'Da' }
+                    onChange={ (e) => handleSearchMin(e) }/>
+          </ItemGrid>
 
-      < ItemGrid area={ area2 }
-                 ps={ 'center start' }
-                 onChange={ (e) => handleSearchMax(e) }>
-        <Search placeholder={ 'A' }/>
-      </ItemGrid>
+          < ItemGrid area={ area2 }
+                     ps={ 'center start' }
+                     onChange={ (e) => handleSearchMax(e) }>
+            <Search placeholder={ 'A' }/>
+          </ItemGrid>
+        </>
+      }
     </>
   )
 }
