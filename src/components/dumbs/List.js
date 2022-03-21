@@ -27,11 +27,9 @@ const ListItemLayout = styled.li`
 `
 export const List = (props) => {
   const [state, dispatch] = useContext(AppContext)
-  const { beersInPage } = state
   const handleModal = (item) =>
     dispatch({ type: 'MODAL_OPEN', payload: item })
 
-   /*localStorage.clear()*/
   return (
     <>
       <ListLayout area={ 'c' }>

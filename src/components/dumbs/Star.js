@@ -11,21 +11,18 @@ const StarFilled = styled(StarF)(props => props.favorites && { color: 'gold' })
 
 export const Star = ({ item }) => {
   const [isFavorites, setIsFavorites] = useState(false)
-  const handleFavorite = (item) => {
-
-    const cookies = JSON.parse(localStorage.getItem(('Favorites')))
-                      ?.filter(el => el.id !== item.id) ?? []
+  const handleFavorite = (pref) => {
+    const cookies = Array.from(new Set(JSON.parse(localStorage.getItem(('Favorites')))))
     if (!isFavorites) {
       localStorage.setItem('Favorites',
-        JSON.stringify(([...cookies, item])))
-      setIsFavorites(!isFavorites)
+        JSON.stringify(([...cookies, pref])))
     } else {
-      const index = cookies.indexOf(item)
+      const index = cookies.indexOf(pref)
       cookies.splice(index, 1)
       localStorage.setItem('Favorites',
         JSON.stringify((cookies)))
-      setIsFavorites(!isFavorites)
     }
+    setIsFavorites(!isFavorites)
   }
 
   return (
